@@ -1,44 +1,45 @@
 package com.manav.journalApp.controller;
 
 import com.manav.journalApp.entity.JournalEntry;
-import com.manav.journalApp.repository.JournalRepository;
+import com.manav.journalApp.service.JournalEntryService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/_journal")
+@RequestMapping("/journal")
 public class JournalEntryController {
-    private Map<Long, JournalEntry> journalEntries = new HashMap<>();
+    @Autowired
+    private JournalEntryService journalEntryService;
 
     @GetMapping
     public List<JournalEntry> getAll() {
-        return new ArrayList<>(journalEntries.values());
+        return journalEntryService.getAllEntries();
     }
 
     @PostMapping
-    public boolean createEntry(@RequestBody JournalEntry journalEntry) {
-        journalEntries.put(journalEntry.getId(), journalEntry);
-        return true;
+    public JournalEntry createEntry(@RequestBody JournalEntry journalEntry) {
+        journalEntry.setDate(LocalDateTime.now());
+        return journalEntryService.saveEntry(journalEntry);
     }
 
     @GetMapping("/id/{journalId}")
-    public JournalEntry getJournalEntryById(@PathVariable Long journalId) {
-        return journalEntries.get(journalId);
+    public JournalEntry getJournalEntryById(@PathVariable ObjectId journalId) {
+        return journalEntryService.getEntryById(journalId).orElse(null);
     }
 
     @DeleteMapping("/id/{journalId}")
-    public boolean deleteJournalById(@PathVariable Long journalId) {
-        journalEntries.remove(journalId);
+    public boolean deleteJournalById(@PathVariable ObjectId journalId) {
+        journalEntryService.deleteEntry(journalId);
         return true;
     }
 
     @PutMapping("/id/{journalId}")
-    public JournalEntry updateJournalById(@PathVariable Long journalId, @RequestBody JournalEntry journalEntry) {
-        return journalEntries.put(journalId, journalEntry);
+    public JournalEntry updateJournalById(@PathVariable ObjectId journalId, @RequestBody JournalEntry journalEntry) {
+        return null;
     }
 }
