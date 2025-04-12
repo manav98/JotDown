@@ -1,7 +1,7 @@
-package com.manav.journalApp.controller;
+package com.manav.JotDown.controller;
 
-import com.manav.journalApp.entity.User;
-import com.manav.journalApp.service.UserService;
+import com.manav.JotDown.entity.User;
+import com.manav.JotDown.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

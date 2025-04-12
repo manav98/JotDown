@@ -1,7 +1,7 @@
-package com.manav.journalApp.service;
+package com.manav.JotDown.service;
 
-import com.manav.journalApp.entity.User;
-import com.manav.journalApp.repository.UserRepository;
+import com.manav.JotDown.entity.User;
+import com.manav.JotDown.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.manav.journalApp.repository;
+package com.manav.JotDown.repository;
 
-import com.manav.journalApp.entity.JournalEntry;
+import com.manav.JotDown.entity.JournalEntry;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

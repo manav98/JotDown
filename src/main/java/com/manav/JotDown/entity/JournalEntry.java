@@ -1,4 +1,4 @@
-package com.manav.journalApp.entity;
+package com.manav.JotDown.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

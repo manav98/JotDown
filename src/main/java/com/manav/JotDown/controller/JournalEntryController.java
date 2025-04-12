@@ -1,16 +1,15 @@
-package com.manav.journalApp.controller;
+package com.manav.JotDown.controller;
 
-import com.manav.journalApp.entity.JournalEntry;
-import com.manav.journalApp.entity.User;
-import com.manav.journalApp.service.JournalEntryService;
-import com.manav.journalApp.service.UserService;
+import com.manav.JotDown.entity.JournalEntry;
+import com.manav.JotDown.entity.User;
+import com.manav.JotDown.service.JournalEntryService;
+import com.manav.JotDown.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
