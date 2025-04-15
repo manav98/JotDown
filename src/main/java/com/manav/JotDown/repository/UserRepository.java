@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends MongoRepository<User, ObjectId> {
     public User findByUserName(String userName);
+
+    void deleteByUserName(String userName);
 }

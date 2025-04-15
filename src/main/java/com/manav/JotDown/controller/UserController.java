@@ -6,6 +6,8 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,15 +25,6 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<User> saveuser(@RequestBody User inputUser) {
-        try {
-            return new ResponseEntity<>(userService.saveuser(inputUser), HttpStatus.CREATED);
-        } catch (Exception exception) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
     @GetMapping("/id/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable ObjectId userId) {
         Optional<User> fetchedUser = userService.getUserById(userId);
@@ -40,19 +33,24 @@ public class UserController {
         } else return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/id/{userId}")
-    public ResponseEntity<?> deleteUserById(@PathVariable ObjectId userId) {
-        userService.deleteUserById(userId);
+    @DeleteMapping()
+    public ResponseEntity<?> deleteUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+//        ObjectId userId = userService.findByUserName(userName).getId();  //Delete by user ID
+//        userService.deleteUserById(userId);
+        userService.deleteByUserName(userName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{userName}")
-    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String userName) {
+    @PutMapping
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
         User userInDb = userService.findByUserName(userName);
-        if (userInDb != null) {
-            userInDb.setPassword(user.getPassword());
-            userService.saveuser(userInDb);
-        }
+        userInDb.setUserName(user.getUserName());
+        userInDb.setPassword(user.getPassword());
+        userService.saveNewuser(userInDb);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
