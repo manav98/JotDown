@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +38,7 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public User findByUserName(String userName) {
+    public User getUserByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 

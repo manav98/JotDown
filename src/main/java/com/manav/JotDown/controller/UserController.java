@@ -47,7 +47,7 @@ public class UserController {
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User userInDb = userService.findByUserName(userName);
+        User userInDb = userService.getUserByUserName(userName);
         userInDb.setUserName(user.getUserName());
         userInDb.setPassword(user.getPassword());
         userService.saveNewuser(userInDb);

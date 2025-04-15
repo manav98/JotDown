@@ -16,8 +16,8 @@ public class PublicController {
     private UserService userService;
 
     @GetMapping("/health-check")
-    public String healthCheck() {
-        return "Ok";
+    public ResponseEntity<String> healthCheck() {
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
     @PostMapping("create-user")
