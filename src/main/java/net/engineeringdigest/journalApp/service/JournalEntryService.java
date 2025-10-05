@@ -33,5 +33,4 @@ public class JournalEntryService {
     public void deleteEntryById(ObjectId journalId) {
         journalEntryRepository.deleteById(journalId);
     }
-
 }
