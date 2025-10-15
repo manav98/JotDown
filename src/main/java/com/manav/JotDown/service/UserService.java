@@ -28,10 +28,16 @@ public class UserService {
         userRepository.save(inputUser);
     }
 
-    public User saveNewuser(User inputUser) {
+    public User saveNewUser(User inputUser) {
         inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
         inputUser.setRoles(Arrays.asList("USER"));
         return userRepository.save(inputUser);
+    }
+
+    public void saveNewAdminUser(User inputUser) {
+        inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
+        inputUser.setRoles(Arrays.asList("USER", "ADMIN"));
+        userRepository.save(inputUser);
     }
 
     public Optional<User> getUserById(ObjectId userId) {

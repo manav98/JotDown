@@ -50,7 +50,7 @@ public class UserController {
         User userInDb = userService.getUserByUserName(userName);
         userInDb.setUserName(user.getUserName());
         userInDb.setPassword(user.getPassword());
-        userService.saveNewuser(userInDb);
+        userService.saveNewUser(userInDb);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
