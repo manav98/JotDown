@@ -1,0 +1,19 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://anorakgiven3j:EA0Tu3Igb8QJX0hw@cluster0.t0rdhjx.mongodb.net/?tls=true&retryWrites=true&w=majority&appName=Cluster0
+      database: journaldb
+      auto-index-creation: true
+
+server:
+  port: 8080
+#  servlet:
+#    context-path: /journal
+#
+
+logging:
+  level:
+#    root: ERROR
+    com:
+      manav:
+        JotDown: ERROR
