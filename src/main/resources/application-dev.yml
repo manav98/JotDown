@@ -16,4 +16,4 @@ logging:
 #    root: ERROR
     com:
       manav:
-        JotDown: ERROR
+        JotDown: DEBUG
