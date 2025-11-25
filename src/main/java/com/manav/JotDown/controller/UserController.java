@@ -1,7 +1,9 @@
 package com.manav.JotDown.controller;
 
+import com.manav.JotDown.api.response.WeatherResponse;
 import com.manav.JotDown.entity.User;
 import com.manav.JotDown.service.UserService;
+import com.manav.JotDown.service.WeatherService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +22,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
-    }
+    @Autowired
+    private WeatherService weatherService;
 
     @GetMapping("/id/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable ObjectId userId) {
@@ -52,5 +52,15 @@ public class UserController {
         userInDb.setPassword(user.getPassword());
         userService.saveNewUser(userInDb);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> greeting() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherResponse = weatherService.getWeather("New Delhi");
+        if (weatherResponse != null) {
+            return new ResponseEntity<>("Hi " + authentication.getName() + " Weather temparature is: " + weatherResponse.getCurrent().temperature, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Hi " + authentication.getName(), HttpStatus.OK);
     }
 }

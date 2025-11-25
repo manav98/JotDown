@@ -17,3 +17,7 @@ logging:
     com:
       manav:
         JotDown: DEBUG
+
+weather:
+  api:
+    key: e0244ebda50a4201b9151613252311
