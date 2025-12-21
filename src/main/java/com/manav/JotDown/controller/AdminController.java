@@ -1,5 +1,6 @@
 package com.manav.JotDown.controller;
 
+import com.manav.JotDown.cache.AppCache;
 import com.manav.JotDown.entity.User;
 import com.manav.JotDown.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AppCache appCache;
 
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers() {
@@ -33,5 +37,10 @@ public class AdminController {
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/clear-app-cache")
+    public void clearAppCache() {
+        appCache.init();
     }
 }
