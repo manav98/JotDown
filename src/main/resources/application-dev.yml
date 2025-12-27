@@ -4,6 +4,17 @@ spring:
       uri: mongodb+srv://anorakgiven3j:EA0Tu3Igb8QJX0hw@cluster0.t0rdhjx.mongodb.net/?tls=true&retryWrites=true&w=majority&appName=Cluster0
       database: journaldb
       auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: manav.guptamg12@gmail.com
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8080
@@ -13,7 +24,7 @@ server:
 
 logging:
   level:
-#    root: ERROR
+    #    root: ERROR
     com:
       manav:
         JotDown: DEBUG
