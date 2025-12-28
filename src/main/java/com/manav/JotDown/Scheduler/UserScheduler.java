@@ -1,6 +1,5 @@
 package com.manav.JotDown.Scheduler;
 
-
 import com.manav.JotDown.cache.AppCache;
 import com.manav.JotDown.entity.JournalEntry;
 import com.manav.JotDown.entity.User;
